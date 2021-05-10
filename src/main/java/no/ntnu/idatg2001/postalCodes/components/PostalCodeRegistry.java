@@ -45,11 +45,10 @@ public class PostalCodeRegistry {
      * @return true or false, if the postal code is present
      */
     public boolean postalCodeExists(PostalCode pc) {
-        for (PostalCode newPC : this.list) {
+        for (PostalCode newPC : this.list)
             if (newPC.getPostalCode().equals(pc.getPostalCode())) {
                 return true;
             }
-        }
         return false;
     }
 
@@ -59,5 +58,13 @@ public class PostalCodeRegistry {
      */
     public void addPostalCode(PostalCode postalCodeObject) {
         this.list.add(postalCodeObject);
+    }
+
+    /**
+     * Method to remove a postal code from the list of current registry
+     * @param postalCodeObject the object to remove from the list
+     */
+    public void removePostalCode(PostalCode postalCodeObject) {
+        this.getList().remove(postalCodeObject);
     }
 }
