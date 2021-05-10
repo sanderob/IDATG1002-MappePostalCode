@@ -184,7 +184,7 @@ public class MainViewController implements Initializable {
     private void deleteClick() {
         if (!(tableView.getSelectionModel().getSelectedItem() == null)) {
             if (vg.getDeleteAlertBox()) {
-                postalCodeRegistry.getList().remove(tableView.getSelectionModel().getSelectedItem());
+                postalCodeRegistry.removePostalCode(tableView.getSelectionModel().getSelectedItem());
             }
         } else {
             vg.getNotSelectedAlert();
