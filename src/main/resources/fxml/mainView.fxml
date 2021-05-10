@@ -1,48 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatg2001.postalCodes.gui.MainViewController">
    <top>
-      <AnchorPane prefHeight="101.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="106.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="209.0" layoutY="35.0" />
-            <MenuBar prefHeight="28.0" prefWidth="601.0">
+            <TextField fx:id="searchBar" layoutX="23.0" layoutY="52.0" promptText="Search" />
+            <MenuBar prefHeight="28.0" prefWidth="700.0">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
+                        <MenuItem mnemonicParsing="false" onAction="#readFromBringClick" text="Import public registry" />
+                        <MenuItem mnemonicParsing="false" onAction="#readFromCustomClick" text="Import custom registry" />
                     <MenuItem mnemonicParsing="false" text="Close" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                    <MenuItem mnemonicParsing="false" onAction="#deleteClick" text="Delete postal code" />
+                      <MenuItem mnemonicParsing="false" onAction="#clearClick" text="Clear registry" />
+                    </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="View">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
+                     <items>
+                        <CheckMenuItem fx:id="darkModeItem" mnemonicParsing="false" onAction="#darkModeClick" text="Dark Mode" />
+                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#aboutClick" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#categoryClick" text="Category explanation" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
+            <AnchorPane layoutX="436.0" layoutY="40.0" prefHeight="48.0" prefWidth="240.0" style="-fx-border-color: black;">
+               <children>
+                  <Text layoutX="5.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category explanation">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="7.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For category explanation, see the Help-menu">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Label fx:id="searchLabel" layoutX="24.0" layoutY="79.0" />
          </children>
       </AnchorPane>
    </top>
+   <bottom>
+      <AnchorPane prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ProgressBar fx:id="progressBar" layoutX="423.0" layoutY="2.0" prefHeight="20.0" prefWidth="245.0" progress="0.0" />
+            <Label fx:id="statusLabel" layoutX="65.0" layoutY="4.0" />
+            <Label fx:id="statusLabel1" layoutX="17.0" layoutY="4.0" prefHeight="17.0" prefWidth="44.0" text="Status:" />
+         </children>
+      </AnchorPane>
+   </bottom>
    <center>
-      <TableView prefHeight="471.0" prefWidth="537.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="323.71747517585754" text="Postal code" />
-          <TableColumn prefWidth="265.78257751464844" text="Postal Area" />
-        </columns>
-      </TableView>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableView" prefHeight="475.0" prefWidth="544.0">
+              <columns>
+                <TableColumn fx:id="postalCodeColumn" editable="false" prefWidth="102.28218007087708" text="Postal code" />
+                <TableColumn fx:id="postalAreaColumn" editable="false" prefWidth="190.1655502319336" text="Postal Area" />
+                  <TableColumn fx:id="municipalityCodeColumn" editable="false" prefWidth="72.33441162109375" text="Municipality&#10;     code" />
+                  <TableColumn fx:id="municipalityNameColumn" editable="false" prefWidth="249.0015869140625" text="Municipality" />
+                  <TableColumn fx:id="categoryColumn" editable="false" prefWidth="66.583984375" text="Category" />
+              </columns>
+            </TableView>
+         </children>
+      </StackPane>
    </center>
 </BorderPane>
