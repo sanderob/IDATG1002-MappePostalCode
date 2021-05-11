@@ -17,7 +17,7 @@ public class PostalCodeTest {
     @Test
     @DisplayName("Test verifies that the object is created correctly in the constructor")
     void postalCodeConstructorTest() {
-        assertEquals("0595", postalCode.getPostalCode());
+        assertEquals("0595", postalCode.getPostalCodeNumber());
         assertEquals("Oslo", postalCode.getPostalArea());
         assertEquals("0301", postalCode.getMunicipalityCode());
         assertEquals("Tønsberg", postalCode.getMunicipalityName());
@@ -27,6 +27,6 @@ public class PostalCodeTest {
     @Test
     @DisplayName("Test verifies that the toString method works")
     void toStringTest() {
-        assertEquals("PostalCode{postalCode='0595', postalArea='Oslo', municipalityCode='0301', municipalityName='Tønsberg', category='G'}", postalCode.toString());
+        assertEquals("PostalCode{postalCodeNumber='0595', postalArea='Oslo', municipalityCode='0301', municipalityName='Tønsberg', category='G'}", postalCode.toString());
     }
 }

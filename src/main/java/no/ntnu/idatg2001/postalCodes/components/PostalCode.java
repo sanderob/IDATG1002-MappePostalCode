@@ -7,7 +7,7 @@ package no.ntnu.idatg2001.postalCodes.components;
  */
 public class PostalCode {
 
-    private final String postalCode;
+    private final String postalCodeNumber;
     private final String postalArea;
     private final String municipalityCode;
     private final String municipalityName;
@@ -15,14 +15,14 @@ public class PostalCode {
 
     /**
      * Constructor for the postal code object
-     * @param postalCode the code
+     * @param postalCodeNumber the code
      * @param postalArea the postal code area
      * @param municipalityCode the municipality code
      * @param municipalityName the municipality name
      * @param category the category
      */
-    public PostalCode(String postalCode, String postalArea, String municipalityCode, String municipalityName, String category) {
-        this.postalCode = postalCode;
+    public PostalCode(String postalCodeNumber, String postalArea, String municipalityCode, String municipalityName, String category) {
+        this.postalCodeNumber = postalCodeNumber;
         this.postalArea = postalArea;
         this.municipalityCode = municipalityCode;
         this.municipalityName = municipalityName;
@@ -41,8 +41,8 @@ public class PostalCode {
      * Getter for the postal code
      * @return the postal code of the object
      */
-    public String getPostalCode() {
-        return postalCode;
+    public String getPostalCodeNumber() {
+        return postalCodeNumber;
     }
 
     /**
@@ -76,7 +76,7 @@ public class PostalCode {
     @Override
     public String toString() {
         return "PostalCode{" +
-                "postalCode='" + postalCode + '\'' +
+                "postalCodeNumber='" + postalCodeNumber + '\'' +
                 ", postalArea='" + postalArea + '\'' +
                 ", municipalityCode='" + municipalityCode + '\'' +
                 ", municipalityName='" + municipalityName + '\'' +

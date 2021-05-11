@@ -85,7 +85,7 @@ public class MainViewController implements Initializable {
             }
             newList = FXCollections.observableArrayList();
             for (PostalCode postalCode : oldList) {
-                if (postalCode.getPostalCode().contains(newString) || postalCode.getPostalArea().toLowerCase()
+                if (postalCode.getPostalCodeNumber().contains(newString) || postalCode.getPostalArea().toLowerCase()
                         .contains(newString.toLowerCase())) {
                     newList.add(postalCode);
                 }
@@ -217,7 +217,7 @@ public class MainViewController implements Initializable {
      * Method called when the program starts, to initialize the table view list with correct columns and content
      */
     private void initializeTable() {
-        postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCodeNumber"));
         postalAreaColumn.setCellValueFactory(new PropertyValueFactory<>("postalArea"));
         municipalityCodeColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityCode"));
         municipalityNameColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityName"));

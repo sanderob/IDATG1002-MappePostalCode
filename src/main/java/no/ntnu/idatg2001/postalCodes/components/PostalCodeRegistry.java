@@ -46,7 +46,7 @@ public class PostalCodeRegistry {
      */
     public boolean postalCodeExists(PostalCode pc) {
         for (PostalCode newPC : this.list)
-            if (newPC.getPostalCode().equals(pc.getPostalCode())) {
+            if (newPC.getPostalCodeNumber().equals(pc.getPostalCodeNumber())) {
                 return true;
             }
         return false;
