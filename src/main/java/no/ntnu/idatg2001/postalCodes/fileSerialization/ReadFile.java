@@ -16,6 +16,8 @@ import java.nio.charset.Charset;
  */
 public class ReadFile {
 
+    private ReadFile(){}
+
 
     //Defining the global class fields
     private static File file;
@@ -45,19 +47,19 @@ public class ReadFile {
         PostalCode postalCode;
         String thisLine;
         if (file == null) {
-            System.err.println("ERROR");
             throw new NullPointerException("No file is selected");
         }
         else  {
-            try {
-                FileReader fr = new FileReader(file.getAbsolutePath(), Charset.forName("windows-1252"));
-                BufferedReader br = new BufferedReader(fr);
+            try (FileReader fr = new FileReader(file.getAbsolutePath(), Charset.forName("windows-1252"));
+                 BufferedReader br = new BufferedReader(fr)) {
                 while ((thisLine = br.readLine()) != null) {
                     String[] array = thisLine.split("\t");
-                    postalCode = new PostalCode(String.format("%04d", Integer.parseInt(array[0])), array[1],
-                            String.format("%04d", Integer.parseInt(array[2])), array[3], array[4]);
-                    if (!(postalCodeRegistry.postalCodeExists(postalCode))) {
-                        postalCodeRegistry.addPostalCode(postalCode);
+                    if (array.length == 5) {
+                        postalCode = new PostalCode(String.format("%04d", Integer.parseInt(array[0])), array[1],
+                                String.format("%04d", Integer.parseInt(array[2])), array[3], array[4]);
+                        if (!(postalCodeRegistry.postalCodeExists(postalCode))) {
+                            postalCodeRegistry.addPostalCode(postalCode);
+                        }
                     }
                 }
             } catch (Exception e) {
