@@ -91,7 +91,7 @@ public class MainViewController implements Initializable {
                 }
             }
             tableView.setItems(newList);
-            if (newList.size() == 0) {
+            if (newList.isEmpty()) {
                 this.setStatusLabelText("");
                 searchLabel.setText("0 search results for " + newString);
             } else if (newString.length() == 0) {
@@ -182,7 +182,7 @@ public class MainViewController implements Initializable {
      */
     @FXML
     private void deleteClick() {
-        if (!(tableView.getSelectionModel().getSelectedItem() == null)) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
             if (vg.getDeleteAlertBox()) {
                 postalCodeRegistry.removePostalCode(tableView.getSelectionModel().getSelectedItem());
             }
