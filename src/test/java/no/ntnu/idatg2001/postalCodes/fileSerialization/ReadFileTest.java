@@ -1,14 +1,18 @@
 package no.ntnu.idatg2001.postalCodes.fileSerialization;
 
 import no.ntnu.idatg2001.postalCodes.components.PostalCodeRegistry;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadFileTest {
 
     PostalCodeRegistry postalCodeRegistry;
+
+    @BeforeAll
+    static void setTest() {
+        ReadFile.test = true;
+    }
 
     @BeforeEach
     void initialize() {
@@ -30,6 +34,11 @@ class ReadFileTest {
         assertEquals(0, postalCodeRegistry.getList().size());
         ReadFile.importFromFile(ReadType.EMPTY);
         assertEquals(0, postalCodeRegistry.getList().size());
+    }
+
+    @AfterAll
+    static void finish() {
+        ReadFile.test = false;
     }
 
 }
