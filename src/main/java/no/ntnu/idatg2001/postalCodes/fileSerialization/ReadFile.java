@@ -39,6 +39,10 @@ public class ReadFile {
 
     }
 
+    private static void readFromEmptyFile() {
+        file = new File("src/main/resources/postalCodeFile/emptyPostalCodeRegister.txt");
+    }
+
     /**
      * Method for reading the file that has been chosen. Reads all files with the same order of fields per line,
      * expecting a standard format
@@ -75,25 +79,29 @@ public class ReadFile {
      */
     public static void importFromFile(ReadType type) {
         postalCodeRegistry = PostalCodeRegistry.getInstance();
-        MainViewController mainViewController = MainViewController.getController();
         int oldSize = postalCodeRegistry.getList().size();
         if (type == ReadType.PUBLIC) {
             readFromPublic();
             fileName = "The public registry";
-        }
-        else if (type == ReadType.CUSTOM) {
+        } else if (type == ReadType.EMPTY) {
+            readFromEmptyFile();
+            readFile();
+        } else if (type == ReadType.CUSTOM) {
             readFromCustomFile();
             if (file != null) {
                 fileName = file.getName();
             }
         }
-        if (file != null) {
-            readFile();
-            int newSize = postalCodeRegistry.getList().size();
-            mainViewController.setStatusLabelText("Loaded " + (newSize - oldSize) +
-                    " postal codes from " + fileName);
-        } else {
-            mainViewController.setStatusLabelText("No file was uploaded");
+        if (type != ReadType.EMPTY) {
+            MainViewController mainViewController = MainViewController.getController();
+            if (file != null) {
+                readFile();
+                int newSize = postalCodeRegistry.getList().size();
+                mainViewController.setStatusLabelText("Loaded " + (newSize - oldSize) +
+                        " postal codes from " + fileName);
+            } else {
+                mainViewController.setStatusLabelText("No file was uploaded");
+            }
         }
     }
 }

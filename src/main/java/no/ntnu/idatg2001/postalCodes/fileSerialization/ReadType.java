@@ -7,5 +7,6 @@ package no.ntnu.idatg2001.postalCodes.fileSerialization;
  */
 public enum ReadType {
     PUBLIC,
-    CUSTOM
+    CUSTOM,
+    EMPTY
 }
