@@ -78,10 +78,10 @@ public class MainViewController implements Initializable {
             ObservableList<PostalCode> oldList;
             ObservableList<PostalCode> newList;
             if (oldString.length() < newString.length()) {
-                oldList = tableView.getItems();
+                oldList = this.tableView.getItems();
             }
             else {
-                oldList = postalCodeRegistry.getList();
+                oldList = this.postalCodeRegistry.getList();
             }
             newList = FXCollections.observableArrayList();
             for (PostalCode postalCode : oldList) {
@@ -90,10 +90,10 @@ public class MainViewController implements Initializable {
                     newList.add(postalCode);
                 }
             }
-            tableView.setItems(newList);
+            this.tableView.setItems(newList);
             if (newList.isEmpty()) {
                 this.setStatusLabelText("");
-                searchLabel.setText("0 search results for " + newString);
+                this.searchLabel.setText("0 search results for " + newString);
             } else if (newString.length() == 0) {
                 this.setStatusLabelText("");
             }
@@ -154,7 +154,7 @@ public class MainViewController implements Initializable {
      */
     @FXML
     private void clearClick() {
-        if (vg.getClearAlertBox()) {
+        if (this.vg.getClearAlertBox()) {
             int size = this.postalCodeRegistry.getList().size();
             this.postalCodeRegistry.getList().clear();
             this.setStatusLabelText("Cleared " + size + " Postal codes from the registry");
@@ -166,7 +166,7 @@ public class MainViewController implements Initializable {
      */
     @FXML
     private void aboutClick() {
-        vg.getAboutBox();
+        this.vg.getAboutBox();
     }
 
     /**
@@ -174,7 +174,7 @@ public class MainViewController implements Initializable {
      */
     @FXML
     private void categoryClick() {
-        vg.getCategoryExplanationBox();
+        this.vg.getCategoryExplanationBox();
     }
 
     /**
@@ -182,12 +182,12 @@ public class MainViewController implements Initializable {
      */
     @FXML
     private void deleteClick() {
-        if (tableView.getSelectionModel().getSelectedItem() != null) {
-            if (vg.getDeleteAlertBox()) {
-                postalCodeRegistry.removePostalCode(tableView.getSelectionModel().getSelectedItem());
+        if (this.tableView.getSelectionModel().getSelectedItem() != null) {
+            if (this.vg.getDeleteAlertBox()) {
+                this.postalCodeRegistry.removePostalCode(this.tableView.getSelectionModel().getSelectedItem());
             }
         } else {
-            vg.getNotSelectedAlert();
+            this.vg.getNotSelectedAlert();
         }
     }
 
@@ -196,10 +196,10 @@ public class MainViewController implements Initializable {
      */
     @FXML
     private void darkModeClick() {
-        if (!darkModeItem.isSelected()) {
+        if (!this.darkModeItem.isSelected()) {
             PostalCodeApplication.getScene().getStylesheets().remove("fxml/dark-mode.css");
         }
-        else if (darkModeItem.isSelected()){
+        else if (this.darkModeItem.isSelected()){
             PostalCodeApplication.getScene().getStylesheets().add("fxml/dark-mode.css");
         }
     }
@@ -209,7 +209,7 @@ public class MainViewController implements Initializable {
      * @param string the string to be put as status
      */
     public void setStatusLabelText(String string) {
-        statusLabel.setText(string);
+        this.statusLabel.setText(string);
     }
 
 
@@ -217,12 +217,12 @@ public class MainViewController implements Initializable {
      * Method called when the program starts, to initialize the table view list with correct columns and content
      */
     private void initializeTable() {
-        postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCodeNumber"));
-        postalAreaColumn.setCellValueFactory(new PropertyValueFactory<>("postalArea"));
-        municipalityCodeColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityCode"));
-        municipalityNameColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityName"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        tableView.setItems(postalCodeRegistry.getList());
+        this.postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCodeNumber"));
+        this.postalAreaColumn.setCellValueFactory(new PropertyValueFactory<>("postalArea"));
+        this.municipalityCodeColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityCode"));
+        this.municipalityNameColumn.setCellValueFactory(new PropertyValueFactory<>("municipalityName"));
+        this.categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        this.tableView.setItems(postalCodeRegistry.getList());
     }
 
     /**
@@ -235,5 +235,6 @@ public class MainViewController implements Initializable {
         this.postalCodeRegistry = PostalCodeRegistry.getInstance();
         this.initializeTable();
         this.setSearchBarChangeListener();
+        this.readFromBringClick();
     }
 }
