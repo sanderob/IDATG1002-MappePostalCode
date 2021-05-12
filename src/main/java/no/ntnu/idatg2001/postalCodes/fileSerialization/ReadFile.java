@@ -22,6 +22,7 @@ public class ReadFile {
     //Defining the global class fields
     private static File file;
     private static String fileName;
+    public static boolean test;
     private static PostalCodeRegistry postalCodeRegistry;
 
     /**
@@ -85,17 +86,19 @@ public class ReadFile {
             fileName = "The public registry";
         } else if (type == ReadType.EMPTY) {
             readFromEmptyFile();
-            readFile();
         } else if (type == ReadType.CUSTOM) {
             readFromCustomFile();
             if (file != null) {
                 fileName = file.getName();
             }
         }
-        if (type != ReadType.EMPTY) {
+        if (file != null) {
+            readFile();
+        }
+
+        if (!test) {
             MainViewController mainViewController = MainViewController.getController();
             if (file != null) {
-                readFile();
                 int newSize = postalCodeRegistry.getList().size();
                 mainViewController.setStatusLabelText("Loaded " + (newSize - oldSize) +
                         " postal codes from " + fileName);
