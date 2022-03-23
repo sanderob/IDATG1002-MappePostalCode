@@ -1,5 +1,4 @@
-.idea/
-*.iml
-*.DS_Store
-target/
-output/
+/.idea
+.DS_Store
+/target
+/output
